@@ -179,8 +179,8 @@ body{font-family:'Patrick Hand',cursive;touch-action:manipulation;overscroll-beh
 #fog-canvas{width:100%;height:100%}
 #grain{position:absolute;inset:0;pointer-events:none;z-index:5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");mix-blend-mode:multiply}
 #vignette{position:absolute;inset:0;pointer-events:none;z-index:6;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.5) 100%)}
-#obj-la#obj-layer{position:absolute;width:100%;height:100%;pointer-events:none;z-index:7}
-#obj-layer .orb-fragment{pointer-events:all}yer{position:absolute;width:100%;height:100%;pointer-events:none;z-index:7}
+#obj-layer{position:absolute;width:100%;height:100%;pointer-events:none;z-index:7}
+#obj-layer .orb-fragment{pointer-events:all}
 #ptcl{position:absolute;inset:0;pointer-events:none;z-index:80}
 
 /* DOODLE WORLD SCRIBBLE EFFECT */
@@ -855,9 +855,175 @@ body{font-family:'Patrick Hand',cursive;touch-action:manipulation;overscroll-beh
 ::-webkit-scrollbar-thumb{background:var(--ink2);border-radius:2px}
 .hint-glow{animation:hintGl 1.5s ease-in-out infinite!important;opacity:.5!important;filter:none!important}
 @keyframes hintGl{0%,100%{opacity:.35;filter:blur(.5px)}50%{opacity:.9;filter:blur(0) drop-shadow(0 0 10px var(--acc-gold))}}
+
+/* STORY / PROLOGUE */
+#story-screen{background:radial-gradient(ellipse at 50% 15%,rgba(70,110,50,.55),transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(20,40,80,.45),transparent 55%),#0a1008;z-index:600}
+.story-book{position:relative;width:min(620px,94vw);max-height:92vh;overflow-y:auto;background:var(--paper);border:4px solid var(--ink);border-radius:4px;box-shadow:10px 10px 0 rgba(0,0,0,.55);animation:nbDrop .5s cubic-bezier(.34,1.56,.64,1) both}
+.story-book::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0,transparent 31px,var(--ruled) 31px,var(--ruled) 32px);pointer-events:none}
+.story-book::after{content:'';position:absolute;top:0;bottom:0;left:40px;width:2px;background:var(--margin);pointer-events:none}
+.story-inner{padding:26px 26px 22px 54px;position:relative;z-index:1}
+.story-kicker{font-family:'Schoolbell',cursive;font-size:11px;letter-spacing:3px;color:var(--acc-red);text-transform:uppercase}
+.story-title{font-family:'Permanent Marker',cursive;font-size:clamp(25px,4.5vw,38px);line-height:1.05;margin:4px 0 12px;color:var(--ink);text-shadow:2px 2px 0 rgba(26,16,8,.18)}
+.story-p{font-family:'Kalam',cursive;font-size:clamp(13px,1.7vw,15px);line-height:1.65;color:var(--ink2);margin-bottom:10px}
+.story-goals{background:rgba(248,192,32,.13);border:2px dashed rgba(26,16,8,.3);border-radius:6px;padding:10px 12px;margin:12px 0}
+.story-goal{font-family:'Kalam',cursive;font-size:clamp(12px,1.5vw,13.5px);color:var(--ink);margin:5px 0;display:flex;gap:8px;align-items:flex-start;line-height:1.45}
+.story-cta{margin-top:14px;font-family:'Permanent Marker',cursive;font-size:clamp(14px,2vw,17px);padding:11px 18px;text-align:center;cursor:pointer;background:#d8efc8;border:2.5px solid var(--ink);border-radius:3px;box-shadow:var(--pshad);color:var(--ink);transition:all .12s}
+.story-cta:hover{transform:translateY(-2px) rotate(-.4deg);box-shadow:5px 6px 0 rgba(26,16,8,.4)}
+.story-cta:active{transform:translateY(1px);box-shadow:2px 2px 0 rgba(26,16,8,.4)}
+.story-skip{text-align:center;font-family:'Kalam',cursive;font-size:12px;color:var(--ink3);cursor:pointer;text-decoration:underline;margin-top:10px}
+
+/* ENDING */
+#ending-screen{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:650;background:radial-gradient(ellipse at 50% 30%,rgba(248,192,32,.18),transparent 55%),rgba(8,6,4,.9);padding:16px;overflow:auto}
+#ending-screen.show{display:flex}
+.ending-book{width:min(560px,94vw);background:var(--paper);border:4px solid var(--ink);border-radius:4px;box-shadow:10px 10px 0 rgba(0,0,0,.55);padding:26px 30px;position:relative;animation:nbDrop .6s cubic-bezier(.34,1.56,.64,1) both;text-align:center}
+.ending-book::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0,transparent 31px,var(--ruled) 31px,var(--ruled) 32px);pointer-events:none}
+.ending-book>*{position:relative;z-index:1}
+.ending-glyph{font-size:44px;margin-bottom:4px;animation:endingFloat 3s ease-in-out infinite}
+@keyframes endingFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+.ending-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}
+.ending-stat{background:var(--paper2);border:2px solid var(--ink);border-radius:4px;padding:7px 4px;font-family:'Kalam',cursive;font-size:11px;color:var(--ink3)}
+.ending-stat strong{display:block;font-family:'Permanent Marker',cursive;font-size:15px;color:var(--ink);margin-top:2px}
+.ending-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.ending-btns .tbtn{font-size:13px;padding:9px 16px}
+/* ============================================================
+   PAPER-CUT EDITION — filter, frame, ambience, pause & QoL
+   ============================================================ */
+#bg-layer{filter:saturate(.9) contrast(1.05) sepia(.08) brightness(.98)}
+#game.active{animation:gameIn .45s ease both}
+@keyframes gameIn{from{opacity:0;transform:scale(1.012)}to{opacity:1;transform:none}}
+.screen.active{animation:screenIn .32s ease both}
+@keyframes screenIn{from{opacity:0}to{opacity:1}}
+
+#paper-edge{position:fixed;inset:0;z-index:95;pointer-events:none;
+  box-shadow:inset 0 0 0 9px var(--paper),inset 0 0 0 12px rgba(26,16,8,.82),inset 0 0 48px rgba(26,16,8,.3);
+}
+#paper-edge::before{content:'';position:absolute;inset:7px;border:1px dashed rgba(26,16,8,.34);filter:url(#paperCut);opacity:.8}
+#paper-edge::after{content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(248,240,220,.5),transparent 4%,transparent 96%,rgba(248,240,220,.5)),
+    linear-gradient(180deg,rgba(248,240,220,.42),transparent 5%,transparent 95%,rgba(248,240,220,.42));
+  mix-blend-mode:screen;opacity:.5}
+#paper-creases{position:absolute;inset:0;z-index:9;pointer-events:none;opacity:.15;mix-blend-mode:multiply;
+  background:
+    repeating-linear-gradient(114deg,transparent 0 118px,rgba(90,60,30,.22) 119px,transparent 122px),
+    repeating-linear-gradient(63deg,transparent 0 176px,rgba(255,255,255,.2) 177px,transparent 181px);
+}
+body.paper-off #paper-edge,body.paper-off #paper-creases{display:none}
+body.paper-off #bg-layer{filter:none}
+
+#fireflies{position:absolute;inset:0;z-index:14;pointer-events:none;opacity:0;transition:opacity 3s}
+body.night #fireflies{opacity:1}
+.firefly{position:absolute;width:5px;height:5px;border-radius:50%;background:#f8e880;
+  box-shadow:0 0 8px 3px rgba(248,224,100,.55);opacity:.15;
+  animation:fireflyDrift var(--fd,10s) ease-in-out infinite alternate,fireflyBlink var(--fb,2.6s) ease-in-out infinite}
+@keyframes fireflyDrift{0%{transform:translate(0,0)}33%{transform:translate(var(--fx,24px),var(--fy,-30px))}66%{transform:translate(calc(var(--fx,24px) * -1),var(--fy,-30px))}100%{transform:translate(0,0)}}
+@keyframes fireflyBlink{0%,100%{opacity:.1}50%{opacity:.95}}
+
+.screen.shake,#game-vp.shake{animation:worldShake .32s ease}
+@keyframes worldShake{0%,100%{transform:translate(0,0)}20%{transform:translate(-5px,2px)}40%{transform:translate(5px,-2px)}60%{transform:translate(-3px,1px)}80%{transform:translate(3px,-1px)}}
+#combat-screen.shake .combat-arena{animation:arenaShake .34s ease}
+@keyframes arenaShake{0%,100%{transform:translate(0,0)}25%{transform:translate(-7px,2px) rotate(-.3deg)}50%{transform:translate(7px,-2px) rotate(.3deg)}75%{transform:translate(-3px,1px)}}
+
+/* little paper scraps instead of only dots */
+.paper-bit{position:absolute;z-index:92;pointer-events:none;width:8px;height:10px;
+  background:var(--paper);border:1px solid rgba(26,16,8,.35);border-radius:1px;
+  animation:paperBit 1.25s cubic-bezier(.2,.7,.3,1) forwards}
+.paper-bit.gold{background:var(--acc-gold2)}
+.paper-bit.blue{background:#cfe0ff}
+.paper-bit.red{background:#ffd0c8}
+@keyframes paperBit{0%{transform:translate(0,0) rotate(0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(.7);opacity:0}}
+
+/* PAUSE / SETTINGS */
+#pause-screen{position:fixed;inset:0;z-index:800;display:none;align-items:center;justify-content:center;padding:16px;
+  background:rgba(10,6,2,.56);backdrop-filter:blur(3px)}
+#pause-screen.show{display:flex}
+.pause-book{width:min(520px,94vw);max-height:92vh;overflow-y:auto;background:var(--paper);border:4px solid var(--ink);
+  border-radius:4px;box-shadow:10px 12px 0 rgba(0,0,0,.45);padding:22px 26px 20px;position:relative;
+  filter:url(#paperCut);animation:nbDrop .32s cubic-bezier(.34,1.56,.64,1) both}
+.pause-book::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent 0,transparent 30px,var(--ruled) 30px,var(--ruled) 31px)}
+.pause-book>*{position:relative;z-index:1}
+.pause-title{font-family:'Permanent Marker',cursive;font-size:clamp(26px,4vw,36px);color:var(--ink);line-height:1;margin-bottom:2px}
+.pause-sub{font-family:'Kalam',cursive;font-size:13px;color:var(--ink2);margin-bottom:14px}
+.pause-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.pause-btn{font-family:'Permanent Marker',cursive;font-size:14px;padding:9px 12px;cursor:pointer;background:var(--paper2);
+  border:2.5px solid var(--ink);border-radius:3px;box-shadow:3px 3px 0 rgba(26,16,8,.28);color:var(--ink);transition:all .1s;text-align:center}
+.pause-btn:hover{transform:translateY(-2px) rotate(-.3deg);box-shadow:4px 5px 0 rgba(26,16,8,.35)}
+.pause-btn.primary{background:#d8efc8}
+.pause-btn.danger{background:#ffd0c8}
+.pause-section{font-family:'Schoolbell',cursive;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);
+  border-top:2px dashed rgba(26,16,8,.22);padding-top:9px;margin:10px 0 7px}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0;font-family:'Kalam',cursive;font-size:13px;color:var(--ink)}
+.setting-row small{display:block;font-family:'Schoolbell',cursive;font-size:9px;color:var(--ink3)}
+.toggle-pill{min-width:54px;text-align:center;font-family:'Permanent Marker',cursive;font-size:10px;padding:4px 8px;cursor:pointer;
+  border:2px solid var(--ink);border-radius:20px;background:var(--paper3);color:var(--ink3);transition:all .12s;flex-shrink:0}
+.toggle-pill.on{background:#c8e8b8;color:#184818;box-shadow:inset 0 0 0 1px rgba(24,72,24,.2)}
+.diff-row{display:flex;gap:6px}
+.diff-opt{font-family:'Permanent Marker',cursive;font-size:10px;padding:4px 9px;border:2px solid var(--ink);border-radius:3px;
+  background:var(--paper2);color:var(--ink3);cursor:pointer}
+.diff-opt.on{background:var(--acc-gold2);color:var(--ink);box-shadow:2px 2px 0 rgba(26,16,8,.25)}
+.pause-controls{font-family:'Kalam',cursive;font-size:11px;line-height:1.7;color:var(--ink2);
+  background:rgba(248,192,32,.1);border:1.5px dashed rgba(26,16,8,.25);border-radius:4px;padding:8px 10px;margin-top:8px}
+.pause-controls b{font-family:'Permanent Marker',cursive;font-size:10px;color:var(--ink)}
+.pause-close-hint{text-align:center;font-family:'Schoolbell',cursive;font-size:10px;color:var(--ink3);margin-top:8px}
+
+/* accessibility / performance preference */
+body.paused #game-vp *,body.paused #nb-hud *,body.paused #topbar *,body.paused #minimap *{animation-play-state:paused!important}
+body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{
+  animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+body.reduce-motion #fireflies{display:none}
+
+/* per-action feedback */
+.cb-act.ready{box-shadow:3px 3px 0 rgba(26,16,8,.3),0 0 0 2px rgba(248,192,32,.45) inset}
+.cb-card.lunge{animation:cbLunge .28s ease}
+@keyframes cbLunge{0%,100%{transform:translateX(0)}45%{transform:translateX(14px) rotate(1.5deg)}}
+.cb-hpbar.flash{animation:hpFlash .3s ease}
+@keyframes hpFlash{0%,100%{filter:none}50%{filter:brightness(1.6) saturate(1.4)}}
+#topbar .tb-btn.paused{background:var(--acc-gold2);box-shadow:0 0 0 3px rgba(248,192,32,.28),var(--shad)}
+
+/* paper-cut card treatment for the book-style panels */
+.title-nb,.story-book,.save-bi,.vc-book,.shop-book,.pause-book,.ending-book{position:relative}
+.title-nb::after,.story-book::after,.vc-book::after,.shop-book::after,.pause-book::after{
+  content:'';position:absolute;inset:-1px;pointer-events:none;border:1px solid rgba(255,255,255,.4);
+  clip-path:polygon(0 1%,2% 0,98% 1%,100% 0,99% 99%,97% 100%,3% 99%,0 100%)}
+
+@media(max-width:768px),(pointer:coarse){
+  .pause-grid{grid-template-columns:1fr}
+  .pause-book{padding:18px 18px 16px}
+  #paper-edge{box-shadow:inset 0 0 0 5px var(--paper),inset 0 0 0 7px rgba(26,16,8,.8),inset 0 0 30px rgba(26,16,8,.3)}
+}
+/* compact phone layout — keep the notebook slim and stack the right-hand widgets */
+@media(max-width:768px){
+  #nb-hud{width:112px}
+  #nb-hud .nb-prog{display:none}
+  #nb-hud .nb-status{padding:2px 7px;min-height:0}
+  #nb-hud .stag{font-size:8px;padding:1px 5px}
+  #nb-hud .pfp-name{font-size:11px}
+  #nb-hud .pfp-class{font-size:8px}
+  #nb-hud .nb-qa{font-size:9px;padding:3px 6px;margin-bottom:3px}
+  #nb-hud .attr-g{gap:2px}
+  #topbar{gap:5px;right:8px;top:8px}
+  #topbar .tb-dots{display:none}
+  #topbar .tb-btn{width:34px;height:34px;font-size:15px}
+  #clock-badge{left:auto;right:8px;top:50px;transform:none;padding:3px 9px;font-size:10px}
+  #minimap{top:86px;right:8px;width:92px;height:68px}
+  #orb-tracker{left:auto;right:8px;top:162px;bottom:auto;transform:none;padding:4px 8px;gap:4px}
+  #orb-tracker>span:first-child{display:none}
+  .orb-pip{width:9px;height:9px}
+  #pause-screen{padding:10px}
+  .pause-book{width:100%;max-height:94vh}
+  #msgbox{width:min(600px,96vw)}
+}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="paperCut" x="-2%" y="-2%" width="104%" height="104%">
+    <feTurbulence type="fractalNoise" baseFrequency=".012 .02" numOctaves="2" seed="8" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs></svg>
+<div id="paper-edge"></div>
 <div id="interact-prompt">
   <span class="prompt-npc-emoji" id="prompt-emoji">👵</span>
   <div class="prompt-key">E</div>
@@ -898,13 +1064,33 @@ body{font-family:'Patrick Hand',cursive;touch-action:manipulation;overscroll-beh
     <div class="title-sticker">v6<br>NEW!</div>
     <div class="title-inner">
       <div class="title-logo">📓 A Jackal's Paper Quest</div>
-      <div class="title-sub">A tale and a adventure of a young jackal that dreams of exploring these worlds.</div>
+      <div class="title-sub">A tale of a young jackal who dreams of exploring forgotten worlds.</div>
       <div class="title-div"></div>
       <div class="title-btns">
         <div class="tbtn ng" onclick="showSaveScreen('new')">📜 New Game</div>
         <div class="tbtn lg" onclick="showSaveScreen('load')">📂 Load Game</div>
         <div class="tbtn" onclick="showAbout()">📖 About</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- STORY PROLOGUE -->
+<div id="story-screen" class="screen">
+  <div class="story-book">
+    <div class="story-inner">
+      <div class="story-kicker">Chapter One</div>
+      <div class="story-title">The Whispering Forest</div>
+      <p class="story-p">The old roads end where the pines begin. Somewhere past the moss and the fog, the forest is losing its magic — the stone seals are cold, the hidden orbs are scattered, and the creatures have grown restless.</p>
+      <p class="story-p">You are a young jackal with a blank journal, a borrowed satchel, and a stubborn belief that every mystery deserves an answer. The forest has been waiting for someone exactly like you.</p>
+      <div class="story-goals">
+        <div class="story-goal"><span>🗿</span><span>Wake the <strong>five stone seals</strong> hidden around the forest.</span></div>
+        <div class="story-goal"><span>🔮</span><span>Recover the <strong>five lost orbs</strong> — each one has its own trial.</span></div>
+        <div class="story-goal"><span>🏆</span><span>Unlock the <strong>Grand Chest</strong> and restore the forest heart.</span></div>
+      </div>
+      <p class="story-p" style="font-size:12px;color:var(--ink3)">Tip: Maple sells herbs, Thornwick sells charms, and night changes what can be seen.</p>
+      <div class="story-cta" onclick="beginQuest()">Begin the Quest ➜</div>
+      <div class="story-skip" onclick="beginQuest()">Skip the story</div>
     </div>
   </div>
 </div>
@@ -956,6 +1142,8 @@ body{font-family:'Patrick Hand',cursive;touch-action:manipulation;overscroll-beh
     <div id="bg-layer"></div>
     <div id="day-overlay"></div>
     <div id="doodle-layer"><canvas id="doodle-canvas"></canvas></div>
+    <div id="fireflies"></div>
+    <div id="paper-creases"></div>
     <div id="fog-layer"><canvas id="fog-canvas"></canvas></div>
     <div id="grain"></div>
     <div id="vignette"></div>
@@ -998,7 +1186,7 @@ body{font-family:'Patrick Hand',cursive;touch-action:manipulation;overscroll-beh
   </div>
 
   <div id="zoom-ind">🔍 <span id="zoom-lv">100%</span></div>
-  <div id="clock-badge">🌞 <span id="clock-txt">Day</span> <span id="clock-time">06:00</span></div>
+  <div id="clock-badge"><span id="clock-icon">🌞</span> <span id="clock-txt">Day 1</span> <span id="clock-time">06:00</span></div>
 
   <!-- HUD -->
   <div id="nb-hud">
@@ -1076,9 +1264,9 @@ body{font-family:'Patrick Hand',cursive;touch-action:manipulation;overscroll-beh
   <div class="tb-dots" id="dot-row"></div>
   <div class="tb-btn" onclick="toggleBag()">🎒<div class="tb-badge" id="bag-badge">0</div></div>
   <div class="tb-btn" onclick="showHint()">💡</div>
-  <div class="tb-btn" onclick="doSave()">💾</div>
-  <div class="tb-btn" id="mute-btn" onclick="toggleMute()">🔊</div>
-<div class="tb-btn" onclick="debugAudio()" style="font-size:11px;font-family:monospace">DBG</div>
+  <div class="tb-btn" onclick="doSave()" title="Save game">💾</div>
+  <div class="tb-btn" id="mute-btn" onclick="toggleMute()" title="Mute / unmute">🔊</div>
+  <div class="tb-btn" id="pause-btn" onclick="togglePause()" title="Pause (Esc)">⏸</div>
   
   
 
@@ -1179,16 +1367,63 @@ body{font-family:'Patrick Hand',cursive;touch-action:manipulation;overscroll-beh
   <div id="victory">
     <div class="vc-book">
       <div class="vc-spine"></div>
-      <div class="vc-inner">
-        <div class="vc-title">Quest Complete!</div>
+      <div class="vc-inner">          <div class="vc-title" id="vc-title">Quest Complete!</div>
         <div class="vc-sub" id="vc-sub">Forest Mystery solved!</div>
         <div class="vc-stats" id="vc-stats"></div>
         <div class="vc-btns">
-          <div class="tbtn" style="font-size:13px;padding:8px 16px" onclick="continueBonus()">🔮 Bonus Mode!</div>
+          <div class="tbtn" id="vc-bonus-btn" style="font-size:13px;padding:8px 16px" onclick="continueBonus()">🔮 Bonus Mode!</div>
+          <div class="tbtn" id="vc-explore-btn" style="font-size:13px;padding:8px 16px" onclick="dismissVictory()">🌲 Keep Exploring</div>
           <div class="tbtn" style="font-size:13px;padding:8px 16px" onclick="goTitle()">🏠 Title</div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- PAUSE / SETTINGS -->
+<div id="pause-screen">
+  <div class="pause-book">
+    <div class="pause-title">Paused</div>
+    <div class="pause-sub">The forest holds its breath. <span id="pause-day">Day 1</span> · <span id="pause-time">06:00</span></div>
+    <div class="pause-grid">
+      <div class="pause-btn primary" onclick="togglePause(false)">▶ Resume</div>
+      <div class="pause-btn" onclick="pauseSave()">💾 Save Game</div>
+      <div class="pause-btn" onclick="pauseBag()">🎒 Adventure Bag</div>
+      <div class="pause-btn danger" onclick="goTitle()">🏠 Title Screen</div>
+    </div>
+    <div class="pause-section">Presentation</div>
+    <div class="setting-row"><div>Paper texture<small>Grain, creases and the cut-paper frame</small></div><div class="toggle-pill on" id="toggle-paper" onclick="toggleSetting('paper')">ON</div></div>
+    <div class="setting-row"><div>Reduce motion<small>Calms bobbing, shakes and ambient loops</small></div><div class="toggle-pill" id="toggle-motion" onclick="toggleSetting('reduceMotion')">OFF</div></div>
+    <div class="pause-section">Difficulty</div>
+    <div class="setting-row"><div>Battle rules<small id="diff-desc">Story mode keeps you on your feet.</small></div>
+      <div class="diff-row">
+        <div class="diff-opt on" data-diff="story" onclick="setDifficulty('story')">STORY</div>
+        <div class="diff-opt" data-diff="normal" onclick="setDifficulty('normal')">NORMAL</div>
+      </div>
+    </div>
+    <div class="pause-section">Controls</div>
+    <div class="pause-controls">
+      <b>WASD / Arrows</b> move · <b>Shift</b> sprint (watch stamina) · <b>Click</b> walk to point<br>
+      <b>E</b> talk/interact · <b>B</b> bag · <b>H</b> hint · <b>I</b> inspect · <b>R</b> quick herb<br>
+      <b>Esc</b> pause/close · <b>Scroll / Pinch</b> zoom · <b>1–4</b> battle actions · <b>Space</b> timing hit
+    </div>
+    <div class="pause-close-hint">Press Esc to resume</div>
+  </div>
+</div>
+
+<!-- ENDING -->
+<div id="ending-screen">
+  <div class="ending-book">
+    <div class="ending-glyph">🌲✨🌲</div>
+    <div class="story-kicker">Epilogue</div>
+    <div class="story-title" style="font-size:clamp(24px,4vw,34px)">The Forest Breathes Again</div>
+    <p class="story-p" id="ending-text">The seals glow like lanterns, the orbs hum in the canopy, and the old paths remember their names. Somewhere in the dark, a very tired jackal is already writing the next page.</p>
+    <div class="ending-stats" id="ending-stats"></div>
+    <div class="ending-btns">
+      <div class="tbtn" onclick="endingContinue()">🌲 Keep Exploring</div>
+      <div class="tbtn lg" onclick="goTitle()">🏠 Title Screen</div>
+    </div>
+    <div class="story-skip" style="text-decoration:none;letter-spacing:4px;margin-top:14px">— THE END —</div>
   </div>
 </div>
 
@@ -1470,6 +1705,71 @@ const loadSaves=()=>{try{return JSON.parse(localStorage.getItem(SK))||[null,null
 const writeSaves=a=>localStorage.setItem(SK,JSON.stringify(a));
 let saveMode='new',activeSlot=0,eraseSlotPending=-1,pendingSlot=-1;
 
+/* ---------- persistent quality-of-life settings ---------- */
+const SETTINGS_KEY='pfq_settings_v1';
+const DEFAULT_SETTINGS={paper:true,reduceMotion:false,difficulty:'story'};
+let SETTINGS={...DEFAULT_SETTINGS};
+function loadSettings(){
+  try{
+    const raw=JSON.parse(localStorage.getItem(SETTINGS_KEY));
+    if(raw&&typeof raw==='object')SETTINGS={...DEFAULT_SETTINGS,...raw};
+  }catch(e){}
+  if(SETTINGS.difficulty!=='normal')SETTINGS.difficulty='story';
+  applySettings();
+}
+function saveSettings(){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(SETTINGS));}catch(e){}}
+function applySettings(){
+  document.body.classList.toggle('paper-off',!SETTINGS.paper);
+  document.body.classList.toggle('reduce-motion',!!SETTINGS.reduceMotion);
+  const tp=document.getElementById('toggle-paper');
+  const tm=document.getElementById('toggle-motion');
+  if(tp){tp.textContent=SETTINGS.paper?'ON':'OFF';tp.classList.toggle('on',SETTINGS.paper);}
+  if(tm){tm.textContent=SETTINGS.reduceMotion?'ON':'OFF';tm.classList.toggle('on',SETTINGS.reduceMotion);}
+  document.querySelectorAll('.diff-opt').forEach(el=>el.classList.toggle('on',el.dataset.diff===SETTINGS.difficulty));
+  const dd=document.getElementById('diff-desc');
+  if(dd)dd.textContent=SETTINGS.difficulty==='normal'
+    ?'Normal mode: losing all HP costs coins and sends you back to camp.'
+    :'Story mode keeps you on your feet through every battle.';
+}
+function toggleSetting(key){
+  if(key!=='paper'&&key!=='reduceMotion')return;
+  SETTINGS[key]=!SETTINGS[key];saveSettings();applySettings();
+}
+function setDifficulty(d){
+  if(d!=='story'&&d!=='normal')return;
+  SETTINGS.difficulty=d;saveSettings();applySettings();
+}
+
+/* ---------- pause / resume ---------- */
+function updatePauseInfo(){
+  const d=document.getElementById('pause-day'),t=document.getElementById('pause-time');
+  if(d)d.textContent='Day '+(G.day||1);
+  if(t)t.textContent=fmtT(Math.floor(G.elapsed||0));
+}
+function togglePause(force){
+  if(G.storyOpen)return;
+  const next=force===undefined?!G.paused:!!force;
+  if(next===G.paused)return;
+  if(next&&(G.combatActive||G.pzOpen||G.shopOpen||G.msgActive))return;
+  G.paused=next;
+  document.body.classList.toggle('paused',next);
+  document.getElementById('pause-screen').classList.toggle('show',next);
+  const pb=document.getElementById('pause-btn');if(pb)pb.classList.toggle('paused',next);
+  if(next){
+    stopTimer();stopWalkSound();
+    PL.walking=false;PL.running=false;
+    PL.tx=PL.wx;PL.ty=PL.wy;
+    Object.keys(PL.keys).forEach(k=>PL.keys[k]=false);
+    setAnim('idle',true);
+    updatePauseInfo();
+  }else{
+    if(!G.msgActive&&!G.pzOpen&&!G.combatActive&&!G.shopOpen)startTimer();
+    lastFrame=performance.now();
+  }
+}
+function pauseSave(){togglePause(false);doSave();}
+function pauseBag(){togglePause(false);toggleBag();}
+
 function showSaveScreen(mode){
   saveMode=mode;
   document.getElementById('save-screen').classList.add('active');
@@ -1538,10 +1838,14 @@ function loadSlot(i){
     bag:s.bag||[],puzzlesDone:s.puzzlesDone||0,totalPuzzles:s.totalPuzzles||5,
     bonusMode:s.bonusMode||false,chestOpened:s.chestOpened||false,elapsed:s.elapsed||0,
     pzStates:s.pzStates||{},xpGained:0,coinsGained:0,charName:s.charName||'Sky',
-    defeatedEnemies:s.defeatedEnemies||[]
+    defeatedEnemies:s.defeatedEnemies||[],introSeen:s.introSeen!==false
   });
   CAM.x=s.camX||.5;CAM.y=s.camY||.65;CAM.revealed=s.revealed||[];
-  dayTime=360; // always resume at daytime
+  dayTime=(typeof s.dayTime==='number')?s.dayTime:360;
+  G.day=s.day||1;G.paused=false;
+  ORB_STATE.found=(s.orbs&&s.orbs.found)||{};
+  ORB_STATE.halves=(s.orbs&&s.orbs.halves)||{};
+  G.storyOpen=false;
   startGame();
 }
 function saveToSlot(i){
@@ -1552,8 +1856,10 @@ function saveToSlot(i){
     atk:G.atk,def:G.def,spd:G.spd,lck:G.lck,bag:G.bag,puzzlesDone:G.puzzlesDone,
     totalPuzzles:G.totalPuzzles,bonusMode:G.bonusMode,chestOpened:G.chestOpened,
     elapsed:G.elapsed,timeStr:fmtT(G.elapsed),pzStates:G.pzStates,
-    charName:G.charName,defeatedEnemies:G.defeatedEnemies,
-    camX:CAM.x,camY:CAM.y,revealed:CAM.revealed
+    charName:G.charName,defeatedEnemies:G.defeatedEnemies,introSeen:G.introSeen,
+    orbs:{found:ORB_STATE.found,halves:ORB_STATE.halves},
+    camX:CAM.x,camY:CAM.y,revealed:CAM.revealed,
+    day:G.day||1,dayTime:dayTime
   };
   writeSaves(saves);
   msg(G.charName,'Saved to Slot '+(i+1)+'! 💾');
@@ -1568,8 +1874,9 @@ function startNewGame(slot,charName='Sky'){
     bonusMode:false,chestOpened:false,elapsed:0,pzStates:{},
     xpGained:0,coinsGained:0,msgs:[],msgActive:false,pzOpen:false,bagOpen:false,
     currentPzId:null,statusEffects:['🌲 Forest'],combatActive:false,shopOpen:false,
-    charName,defeatedEnemies:[]
+    charName,defeatedEnemies:[],introSeen:false,storyOpen:false,paused:false,day:1
   });
+  dayTime=360;
   CAM.x=.5;CAM.y=.65;CAM.zoom=1.6;CAM.revealed=[];
   startGame();
 }
@@ -1580,7 +1887,7 @@ const G={
   puzzlesDone:0,totalPuzzles:5,bonusMode:false,chestOpened:false,elapsed:0,
   xpGained:0,coinsGained:0,msgs:[],msgActive:false,pzOpen:false,bagOpen:false,
   currentPzId:null,pzStates:{},combatActive:false,shopOpen:false,charName:'Sky',
-  defeatedEnemies:[]
+  defeatedEnemies:[],introSeen:false,storyOpen:false,paused:false,day:1
 };
 
 const PL={
@@ -1594,12 +1901,19 @@ const PL={
 };
 let loopId=null,stoneEls={},npcEls={},enemyEls={};
 let dayTime=360;
-const DAY_SPEED=0.5; // minutes per second
+let lastFrame=performance.now(),hudAccum=0;
+const DAY_SPEED=0.5; // in-game minutes per real second
 
 function startGame(){
   document.getElementById('save-screen').classList.remove('active');
   document.getElementById('title-screen').classList.remove('active');
   document.getElementById('game').classList.add('active');
+  G.paused=false;document.body.classList.remove('paused');
+  document.getElementById('pause-screen').classList.remove('show');
+  const pauseBtn=document.getElementById('pause-btn');if(pauseBtn)pauseBtn.classList.remove('paused');
+  if(!G.day)G.day=1;
+  if(!isFinite(dayTime))dayTime=360;
+  applySettings();
   stopAllBgm(300);
   setTimeout(()=>{AUDIO.currentBgm=null;unlockAndPlay('overworld');},400);
 
@@ -1615,45 +1929,72 @@ function startGame(){
 
   initRings();
   spawnLeaves();
+  initFireflies();
   initMobileCtrl();
   initFog();
   initDoodleCanvas();
 
   // Place all objects AFTER camera is synced
   placeAll();
-  let dayTime=360;
-
-  
+  updateDayNight(0);
   updateHUD();
   updateBagUI();
   updateProgList();
   startTimer();
 
   if(loopId)cancelAnimationFrame(loopId);
+  lastFrame=performance.now();
   loop();
 
-  setTimeout(()=>{
-    msg(nm,'Wow! This forest is incredible! Time to explore!');
-    setTimeout(()=>msg(nm,'I need to find five ancient stone seals AND five hidden orbs to open the Grand Chest!'),900);
-  },500);
+  if(!G.introSeen){
+    showPrologue();
+  }else{
+    setTimeout(()=>{
+      msg(nm,'Wow! This forest is incredible! Time to explore!');
+      setTimeout(()=>msg(nm,'I need to find five ancient stone seals AND five hidden orbs to open the Grand Chest!'),900);
+    },500);
+  }
 }
 
-function loop(){
-  updateKeys();
-  initOrbs();
-  updateCam();
-  renderFog();
-  playBgm('overworld');
-  renderMinimap();
-  renderDoodle();
-  checkProximity();
-  updateDayNight();
+function showPrologue(){
+  G.storyOpen=true;
+  document.getElementById('story-screen').classList.add('active');
+}
+function beginQuest(){
+  G.introSeen=true;G.storyOpen=false;
+  document.getElementById('story-screen').classList.remove('active');
+  const nm=G.charName;
+  setTimeout(()=>msg(nm,'So this is the Whispering Forest... the air tastes like old magic and rain.'),200);
+  setTimeout(()=>msg(nm,'Five stone seals guard the forest heart, and five orbs are hidden out there. Each one has its own trial.'),1000);
+  setTimeout(()=>msg(nm,'Maple the herbalist and Thornwick the wizard live nearby. They might know where to start.'),1800);
+}
+
+function loop(now){
+  const dt=Math.min(.05,Math.max(.001,((now||performance.now())-lastFrame)/1000));
+  lastFrame=now||performance.now();
+  if(!G.paused){
+    updateKeys(dt);
+    updateCam(dt);
+    updateOrbsWithCam();
+    renderFog();
+    playBgm('overworld');
+    renderMinimap();
+    renderDoodle();
+    checkProximity();
+    updateDayNight(dt);
+    hudAccum+=dt;
+    if(hudAccum>=.15){hudAccum=0;updateHUD();}
+  }
   loopId=requestAnimationFrame(loop);
 }
 
-function updateKeys(){
-  if(G.pzOpen||G.msgActive||G.combatActive||G.shopOpen)return;
+function updateKeys(dt){
+  if(G.paused||G.pzOpen||G.msgActive||G.combatActive||G.shopOpen||G.storyOpen)return;
   const K=PL.keys;
+  const scale=clamp(dt*60,.35,2.2);
+  const sprinting=!!K.shift&&G.sta>0.15;
+  PL.speed=.0022+G.spd*.00006;
+  const spd=PL.speed*scale*(sprinting?1.9:1);
   let dx=0,dy=0;
   if(K.w||K.up)    dy-=1;
   if(K.s||K.down)  dy+=1;
@@ -1663,30 +2004,31 @@ function updateKeys(){
   const len=Math.hypot(dx,dy);
   if(len>0){
     dx/=len;dy/=len;
-    const spd=PL.speed*(K.shift?2.1:1);
     PL.wx=clamp(PL.wx+dx*spd,.03,.97);
     PL.wy=clamp(PL.wy+dy*spd,.03,.97);
     PL.tx=PL.wx;PL.ty=PL.wy;
     if(dx!==0)PL.facing=dx>0?1:-1;
-    PL.walking=true;PL.running=!!K.shift;
+    PL.walking=true;PL.running=sprinting;
     PL.idleTimer=0;
     PL.trailTimer=(PL.trailTimer||0)+1;
     if(PL.trailTimer>8){spawnTrail();PL.trailTimer=0;}
-    G.sta=Math.max(0,G.sta-(K.shift?.006:.002));
-    setAnim(K.shift?'run':'walk',true);
+    G.sta=Math.max(0,G.sta-(sprinting?.5:.08)*dt);
+    if(G.sta<=0.05&&K.shift&&!G._winded){G._winded=true;addStatus('😮‍💨 Winded');}
+    if(G.sta>2)G._winded=false;
+    setAnim(sprinting?'run':'walk',true);
     startWalkSound();
   }else{
     const d=Math.hypot(PL.tx-PL.wx,PL.ty-PL.wy);
     if(d>0.008){
       const nx=PL.tx-PL.wx,ny=PL.ty-PL.wy;
-      PL.wx+=nx/d*PL.speed;
-      PL.wy+=ny/d*PL.speed;
+      PL.wx+=nx/d*PL.speed*scale;
+      PL.wy+=ny/d*PL.speed*scale;
       if(nx!==0)PL.facing=nx>0?1:-1;
       PL.walking=true;PL.running=false;
       PL.idleTimer=0;
       PL.trailTimer=(PL.trailTimer||0)+1;
       if(PL.trailTimer>8){spawnTrail();PL.trailTimer=0;}
-      G.sta=Math.max(0,G.sta-.002);
+      G.sta=Math.max(0,G.sta-.08*dt);
       setAnim('walk',true);
       startWalkSound();
     }else{
@@ -1694,9 +2036,11 @@ function updateKeys(){
       if(PL.walking){
         PL.walking=false;PL.running=false;
         setAnim('land',true);
+        spawnPuff();
         stopWalkSound();
         setTimeout(()=>{if(!PL.walking)setAnim('idle',true);},280);
       }
+      G.sta=Math.min(G.maxSta,G.sta+.55*dt);
       PL.idleTimer=(PL.idleTimer||0)+1;
       if(PL.idleTimer>10&&curAnim!=='idle')setAnim('idle',true);
     }
@@ -1737,10 +2081,11 @@ function w2s(wx,wy){
 }
 function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v))}
 
-function updateCam(){
-  CAM.x+=(PL.wx-CAM.x)*CAM.smooth;
-  CAM.y+=(PL.wy-CAM.y)*CAM.smooth;
-  CAM.zoom+=(CAM.targetZoom-CAM.zoom)*.05;
+function updateCam(dt){
+  const k=Math.min(1,CAM.smooth*(dt*60||1));
+  CAM.x+=(PL.wx-CAM.x)*k;
+  CAM.y+=(PL.wy-CAM.y)*k;
+  CAM.zoom+=(CAM.targetZoom-CAM.zoom)*Math.min(1,.05*(dt*60||1));
   const hw=.5/CAM.zoom;
   CAM.x=clamp(CAM.x,hw,1-hw);
   CAM.y=clamp(CAM.y,hw,1-hw);
@@ -1841,28 +2186,29 @@ function updateObjsWithCam(){
   });
 }
 
-function updateDayNight(){
-  dayTime=(dayTime+DAY_SPEED/60)%1440;
+function updateDayNight(dt=0){
+  const prev=dayTime;
+  dayTime=(dayTime+DAY_SPEED*dt)%1440;
+  if(dayTime<prev){G.day=(G.day||1)+1;addStatus('🌅 Day '+G.day);spawnPaperBits(innerWidth*.5,90,8);}
   const h=Math.floor(dayTime/60),m=Math.floor(dayTime%60);
   const timeStr=`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`;
   document.getElementById('clock-time').textContent=timeStr;
-  let isDay=h>=6&&h<20;
   let darkness=0;
   if(h>=20)darkness=Math.min(1,(h-20)/3);
   if(h>=23||h<4)darkness=1;
   if(h>=4&&h<6)darkness=Math.max(0,1-(h-4)/2);
-  document.getElementById('clock-txt').textContent=darkness>.5?'Night':'Day';
-  document.getElementById('clock-badge').children[0].textContent=darkness>.5?'🌙':'🌞';
+  const icon=document.getElementById('clock-icon');
+  if(icon)icon.textContent=darkness>.5?'🌙':'🌞';
+  document.getElementById('clock-txt').textContent='Day '+(G.day||1);
   const alpha=darkness*.78;
   document.getElementById('day-overlay').style.background=`rgba(10,8,30,${alpha})`;
-  // Update fog density based on time
+  document.body.classList.toggle('night',darkness>.5);
   FOG_DENSITY=darkness>.5?.92:.82;
-  // Make enemies more active at night (more alert range)
   ENEMY_NPCS.forEach(e=>e._curAlertRange=e.alertRange*(darkness>.5?1.5:1));
 }
 let FOG_DENSITY=.82;
 document.getElementById('game-vp').addEventListener('click',e=>{
-  if(G.pzOpen||G.msgActive||G.combatActive||G.shopOpen)return;
+  if(G.pzOpen||G.msgActive||G.combatActive||G.shopOpen||G.storyOpen)return;
 
   // Check if clicked an orb fragment directly
   const orbFrag=e.target.closest('.orb-fragment');
@@ -1928,43 +2274,43 @@ function showWaypoint(sx,sy){
 
 document.addEventListener('keydown',e=>{
   const k=e.key.toLowerCase();
-  if(k==='w')         PL.keys.w=true;
-  if(k==='s')         PL.keys.s=true;
-  if(k==='a')         PL.keys.a=true;
-  if(k==='d')         PL.keys.d=true;
-  if(k==='arrowup')   PL.keys.up=true;
-  if(k==='arrowdown') PL.keys.down=true;
-  if(k==='arrowleft') PL.keys.left=true;
-  if(k==='arrowright')PL.keys.right=true;
-  if(e.key==='Shift') PL.keys.shift=true;
+  if(G.paused){
+    if(e.key==='Escape'||k==='p'){e.preventDefault();togglePause(false);}
+    return;
+  }
+  if(G.combatActive){
+    const acts=['att','def','item','spc'];
+    if(['1','2','3','4'].includes(e.key)){e.preventDefault();cbAct(acts[Number(e.key)-1]);return;}
+    if((e.key===' '||k==='a')&&combatState.timingActive){e.preventDefault();timingPress();return;}
+    return;
+  }
+  if(!G.pzOpen&&!G.msgActive&&!G.shopOpen&&!G.storyOpen){
+    if(k==='w')         PL.keys.w=true;
+    if(k==='s')         PL.keys.s=true;
+    if(k==='a')         PL.keys.a=true;
+    if(k==='d')         PL.keys.d=true;
+    if(k==='arrowup')   PL.keys.up=true;
+    if(k==='arrowdown') PL.keys.down=true;
+    if(k==='arrowleft') PL.keys.left=true;
+    if(k==='arrowright')PL.keys.right=true;
+    if(e.key==='Shift') PL.keys.shift=true;
+  }
   if(e.key==='Escape'){
-    if(G.bagOpen)closeBag();
-    if(G.pzOpen)closePz();
-    if(G.shopOpen)closeShop();
+    if(G.bagOpen){closeBag();return;}
+    if(G.pzOpen){closePz();return;}
+    if(G.shopOpen){closeShop();return;}
+    if(document.getElementById('game').classList.contains('active'))togglePause();
+    return;
   }
   if(!document.getElementById('game').classList.contains('active'))return;
-  if(k==='b')toggleBag();
+  if(k==='b'&&!G.pzOpen&&!G.shopOpen&&!G.msgActive)toggleBag();
   if(k==='h')showHint();
   if(k==='i')inspect();
-  if(k==='e'){
-    if(_nearestNPC){
-      interactNPC(_nearestNPC);
-    }
-  }
-  if(e.key==='Escape'){
-    if(G.bagOpen)closeBag();
-    if(G.pzOpen)closePz();
-    if(G.shopOpen)closeShop();
-  }
-  if(e.key==='Enter'){
-    G.msgActive=false;G.pzOpen=false;
-    G.combatActive=false;G.shopOpen=false;
-    G.msgs=[];
-    document.getElementById('msgbox').classList.remove('show');
-    document.getElementById('pz-panel').classList.remove('open');
-    document.getElementById('overlay').classList.remove('dim');
-    document.getElementById('combat-screen').classList.remove('show');
-    document.getElementById('shop-screen').classList.remove('show');
+  if(k==='r'&&!G.msgActive)useHerb();
+  if(k==='m')toggleMute();
+  if(k==='e'&&_nearestNPC&&!G.msgActive&&!G.bagOpen)interactNPC(_nearestNPC);
+  if(e.key==='Enter'&&G.msgActive){
+    const box=document.getElementById('msgbox');if(box)box.click();
   }
   if(G.pzOpen&&G.currentPzId){
     const st=G.pzStates[G.currentPzId];
@@ -2316,9 +2662,6 @@ function checkProximity(){
 
   // Interact prompt for friendly NPCs
   updateInteractPrompt();
-
-  // HUD refresh
-  updateHUD();
 }
 
 function placeNPCs(){
@@ -2660,7 +3003,7 @@ function winCombat(){
     lastCombatEnd = Date.now();
     G.defeatedEnemies.push(currentEnemy.id);
     const en = enemyEls[currentEnemy.id];if(en)en.remove();delete enemyEls[currentEnemy.id];
-    G.xp = Math.min(G.maxXp,G.xp+currentEnemy.xp);
+    G.xp += currentEnemy.xp;
     G.coins += currentEnemy.coins;G.xpGained += currentEnemy.xp;G.coinsGained += currentEnemy.coins;
     const pos = w2s(PL.wx,PL.wy);
     spawnPts(pos.x,pos.y,'#f0c040',20);
@@ -2774,31 +3117,74 @@ function dealEnemyDamage(dmg,crit=false,magic=false){
   document.getElementById('cb-en-hpv').textContent=currentEnemy.curHp+'/'+currentEnemy.hp;
   const el=document.getElementById('cb-en-sprite');
   el.style.animation='none';setTimeout(()=>el.style.animation='',50);
+  const card=document.getElementById('cb-en-card');
+  card.classList.add(crit||magic?'flash-gold':'flash-red','shake');
+  document.getElementById('cb-pl-card').classList.add('lunge');
+  setTimeout(()=>{card.classList.remove('flash-gold','flash-red','shake');document.getElementById('cb-pl-card').classList.remove('lunge');},430);
+  spawnCbHitNum('cb-en-card',(crit?'CRIT! ':'')+(magic?'✨ ':'')+dmg,crit||magic?'crit':'dmg');
+  screenShake('#combat-screen');
+  playSfx('hit');
   document.getElementById('cb-log').textContent=crit?`Critical hit! ${dmg} damage to ${currentEnemy.name}!`:magic?`Arcane Burst! ${dmg} damage!`:`Dealt ${dmg} damage to ${currentEnemy.name}!`;
-  if(currentEnemy.curHp<=0){setTimeout(()=>winCombat(),800);}
-  else{setTimeout(()=>enemyTurn(),1000);}
+  if(currentEnemy.curHp<=0)setTimeout(()=>winCombat(),800);
+  else setTimeout(()=>enemyTurn(),1000);
 }
 function enemyTurn(){
   document.getElementById('cb-log').textContent=`${currentEnemy.name} attacks!`;
   setTimeout(()=>{
     let dmg=Math.max(1,(currentEnemy.atk||5)-Math.floor(G.def*.5)+(combatState.defending?-2:0)+Math.floor(Math.random()*3));
-    if(combatState.defending){dmg=Math.max(1,Math.floor(dmg*.5));document.getElementById('cb-log').textContent=`Blocked! ${dmg} damage received!`;}
-    else document.getElementById('cb-log').textContent=`${currentEnemy.name} dealt ${dmg} damage!`;
-    G.hp=Math.max(1,G.hp-dmg);updateHUD();updateCbPlayer();
+    if(combatState.defending)dmg=Math.max(1,Math.floor(dmg*.5));
+    const nextHp=G.hp-dmg;
+    if(nextHp<=0&&SETTINGS.difficulty==='normal'){
+      G.hp=0;updateCbPlayer();updateHUD();defeatPlayer();return;
+    }
+    G.hp=Math.max(1,nextHp);
+    updateHUD();updateCbPlayer();
     playSfx('hit');
     combatState.defending=false;
+    const card=document.getElementById('cb-pl-card');
+    card.classList.add('flash-red','shake');
+    setTimeout(()=>card.classList.remove('flash-red','shake'),430);
+    spawnCbHitNum('cb-pl-card','-'+dmg,'dmg');
+    screenShake('#combat-screen');
+    const img=document.getElementById('cb-pl-img');
+    img.style.filter='saturate(3) sepia(1) hue-rotate(-30deg) brightness(1.5)';
+    setTimeout(()=>img.style.filter='',400);
     const pos=w2s(PL.wx,PL.wy);
     spawnFT(pos.x,pos.y-40,'-'+dmg+' HP','red');
     document.getElementById('player-root').className='hurt';
     setTimeout(()=>{document.getElementById('player-root').className='idle';},500);
-    if(G.hp<=1){document.getElementById('cb-log').textContent='HP critical! Hang in there!';addStatus('❤️ Low HP!');}
+    document.getElementById('cb-log').textContent=combatState.defending
+      ?`🛡️ Blocked! Only ${dmg} damage received!`
+      :`💢 ${currentEnemy.name} dealt ${dmg} damage!`;
+    if(G.hp<=1){document.getElementById('cb-log').textContent+=' ❤️ HP critical!';addStatus('❤️ Low HP!');}
     setTimeout(()=>{combatState.playerTurn=true;document.getElementById('cb-actions').style.display='grid';},1200);
   },800);
+}
+function defeatPlayer(){
+  if(!G.combatActive)return;
+  const loss=Math.min(G.coins,Math.max(5,Math.floor(G.coins*.15)));
+  G.coins-=loss;G.hp=Math.max(1,Math.floor(G.maxHp*.5));
+  G.combatActive=false;G.msgActive=false;
+  document.getElementById('combat-screen').classList.remove('show');
+  combatState.playerTurn=true;combatState.timingActive=false;combatState.defending=false;
+  stopAllBgm(300);
+  setTimeout(()=>{AUDIO.currentBgm=null;unlockAndPlay('overworld');},350);
+  lastCombatEnd=Date.now();
+  PL.wx=.5;PL.wy=.65;PL.tx=PL.wx;PL.ty=PL.wy;
+  Object.keys(PL.keys).forEach(key=>PL.keys[key]=false);
+  PL.walking=false;PL.running=false;
+  stopWalkSound();setAnim('idle',true);
+  CAM.x=.5;CAM.y=.65;
+  addStatus('💫 Defeated');
+  updateHUD();
+  msg(G.charName,`I blacked out... someone dragged me back to camp. Lost ${loss} coins, but I am still breathing.`);
 }
 function winCombat(){
   const enCard=document.getElementById('cb-en-card');
   enCard.classList.add('flash-gold');
   spawnCbHitNum('cb-en-card','KO!','crit');
+  screenShake('#combat-screen');
+  spawnPaperBits(innerWidth*.5,innerHeight*.45,14);
 
   setTimeout(()=>{
     document.getElementById('combat-screen').classList.remove('show');
@@ -2834,7 +3220,7 @@ function winCombat(){
     delete enemyEls[currentEnemy.id];
 
     // XP and coins
-    G.xp=Math.min(G.maxXp,G.xp+currentEnemy.xp);
+    G.xp+=currentEnemy.xp;
     G.coins+=currentEnemy.coins;
     G.xpGained+=currentEnemy.xp;
     G.coinsGained+=currentEnemy.coins;
@@ -2956,7 +3342,7 @@ function pzSolved(id){
   closePz();
   const el=stoneEls[id];if(el){el.classList.add('solved');setTimeout(()=>el.remove(),800);delete stoneEls[id];}
   const xpg=60+~~(Math.random()*30);const cg=18+~~(Math.random()*25);
-  G.xp=Math.min(G.maxXp,G.xp+xpg);G.xpGained+=xpg;
+  G.xp+=xpg;G.xpGained+=xpg;
   G.coins+=cg;G.coinsGained+=cg;
   const pos=w2s(PL.wx,PL.wy);
   spawnPts(pos.x,pos.y,'#f0c040',20);
@@ -2968,7 +3354,11 @@ function pzSolved(id){
   updateHUD();updateDots();updateProgList();
   msg(G.charName,`YES! I cracked it! The ancient magic flows again! This is SO awesome!`);
   if(!G.bonusMode&&G.puzzlesDone>=PUZZLES.length)setTimeout(allMainDone,1400);
-  else if(G.bonusMode&&G.puzzlesDone>=PUZZLES.length+BONUS.length)setTimeout(showGrandVictory,1400);
+  else if(G.bonusMode&&G.puzzlesDone>=PUZZLES.length+BONUS.length)setTimeout(()=>{
+    stopTimer();
+    document.getElementById('chest').classList.add('ready');
+    msg(G.charName,'All three hidden seals are broken! The Grand Chest is awake again... and something inside is singing.');
+  },1400);
 }
 function pzFailed(id,hp){
   G.pzStates[id].attempts++;
@@ -3182,7 +3572,7 @@ function clickChest(){
   const pos=w2s(CHEST_POS.wx,CHEST_POS.wy);
   spawnPts(pos.x,pos.y,'#f0c040',30);spawnFT(pos.x,pos.y-30,'Grand Treasure!');
   [{emoji:'💎',name:'Heart of Forest',count:1},{emoji:'🌿',name:'Healing Herb',count:5},{emoji:'⚡',name:'Magic Crystal',count:3},{emoji:'🏆',name:'Champion Trophy',count:1},{emoji:'🗝️',name:'Ancient Key',count:1}].forEach(r=>addToBag(r));
-  G.hp=G.maxHp;G.mp=G.maxMp;G.coins+=150;G.coinsGained+=150;G.xp=Math.min(G.maxXp,G.xp+150);G.xpGained+=150;
+  G.hp=G.maxHp;G.mp=G.maxMp;G.coins+=150;G.coinsGained+=150;G.xp+=150;G.xpGained+=150;
   addStatus('Champion!');updateHUD();
   msg(G.charName,'OH WOW! The Grand Forest Treasure! I did it! HP and MP fully restored!');
   setTimeout(()=>msg(G.charName,'I explored every corner! This jackal is going in the history books!',showVictory),900);
@@ -3191,26 +3581,66 @@ function clickChest(){
 // ═══════════════════════════════════════════
 // VICTORY
 // ═══════════════════════════════════════════
+function victoryStats(){
+  return [
+    {l:'Time',v:fmtT(G.elapsed)},
+    {l:'XP Gained',v:'+'+G.xpGained},
+    {l:'Coins',v:'+'+G.coinsGained},
+    {l:'Items',v:G.bag.reduce((a,i)=>a+i.count,0)},
+    {l:'Attempts',v:Object.values(G.pzStates).reduce((a,s)=>a+(s.attempts||0),0)},
+    {l:'Level',v:'Lv.'+G.level}
+  ];
+}
+function fillStats(row,cls){
+  row.innerHTML='';
+  victoryStats().forEach(({l,v})=>{const d=document.createElement('div');d.className=cls;d.innerHTML=l+'<strong>'+v+'</strong>';row.appendChild(d);});
+}
 function showVictory(){
   stopTimer();
-  document.getElementById('vc-sub').textContent=`All 5 Forest Seals broken! Time: ${fmtT(G.elapsed)}`;
-  const row=document.getElementById('vc-stats');row.innerHTML='';
-  [{l:'Time',v:fmtT(G.elapsed)},{l:'XP Gained',v:'+'+G.xpGained},{l:'Coins',v:'+'+G.coinsGained},{l:'Items',v:G.bag.reduce((a,i)=>a+i.count,0)},{l:'Attempts',v:Object.values(G.pzStates).reduce((a,s)=>a+(s.attempts||0),0)},{l:'Level',v:'Lv.'+G.level}]
-    .forEach(({l,v})=>{const d=document.createElement('div');d.className='vc-stat';d.innerHTML=l+'<br><strong>'+v+'</strong>';row.appendChild(d);});
+  const final=G.bonusMode;
+  const title=document.getElementById('vc-title');
+  if(title)title.textContent=final?'Forest Master!':'Quest Complete!';
+  document.getElementById('vc-sub').textContent=final
+    ?`All 8 seals broken and 5 orbs restored — the forest is safe! Time: ${fmtT(G.elapsed)}`
+    :`All 5 Forest Seals and 5 lost orbs! Time: ${fmtT(G.elapsed)}`;
+  fillStats(document.getElementById('vc-stats'),'vc-stat');
+  const bonusBtn=document.getElementById('vc-bonus-btn');
+  if(bonusBtn)bonusBtn.style.display=final?'none':'';
+  const exploreBtn=document.getElementById('vc-explore-btn');
+  if(exploreBtn)exploreBtn.style.display=final?'none':'';
   document.getElementById('victory').classList.add('show');
   for(let i=0;i<80;i++)setTimeout(()=>{const vp=document.getElementById('game-vp').getBoundingClientRect();spawnPts(Math.random()*vp.width,Math.random()*vp.height*.4,['#f0c040','#e84040','#4a90d9','#50c050'][~~(Math.random()*4)],5);},i*70);
+}
+function dismissVictory(){
+  document.getElementById('victory').classList.remove('show');
+  stopTimer();startTimer();
+  msg(G.charName,'Plenty of forest left to wander. Let us see what else is out here!');
 }
 function continueBonus(){
   document.getElementById('victory').classList.remove('show');
   G.bonusMode=true;G.totalPuzzles=PUZZLES.length+BONUS.length;G.chestOpened=false;
   document.getElementById('chest-lid').classList.remove('open');document.getElementById('chest').classList.remove('ready');
-  const layer=document.getElementById('obj-layer');
   document.querySelectorAll('.pstone').forEach(e=>e.remove());
-  placeStones();placeNPCs();startTimer();
+  placeStones();placeNPCs();startTimer();updateHUD();updateProgList();updateDots();
   msg(G.charName,'Wait... THREE MORE hidden seals?! In the deeper forest?! I am SO ready for this!');
 }
 function showGrandVictory(){
-  stopTimer();document.getElementById('vc-sub').textContent='ALL 8 SEALS! True Forest Master!';showVictory();
+  stopTimer();
+  document.getElementById('victory').classList.remove('show');
+  const stats=document.getElementById('ending-stats');
+  if(stats){
+    stats.innerHTML='';
+    victoryStats().forEach(({l,v})=>{const d=document.createElement('div');d.className='ending-stat';d.innerHTML=l+'<strong>'+v+'</strong>';stats.appendChild(d);});
+  }
+  const txt=document.getElementById('ending-text');
+  if(txt)txt.textContent=`${G.charName} broke every seal, gathered every orb, and opened the Grand Chest not once but twice. The Whispering Forest will tell this story for a long, long time.`;
+  document.getElementById('ending-screen').classList.add('show');
+  for(let i=0;i<120;i++)setTimeout(()=>{const vp=document.getElementById('game-vp').getBoundingClientRect();spawnPts(Math.random()*vp.width,Math.random()*vp.height*.5,['#f0c040','#e84040','#4a90d9','#50c050','#c080ff'][~~(Math.random()*5)],4);},i*55);
+}
+function endingContinue(){
+  document.getElementById('ending-screen').classList.remove('show');
+  startTimer();
+  msg(G.charName,'The forest is peaceful again. But a good explorer never really stops exploring.');
 }
 
 function updateHUD(){
@@ -3225,8 +3655,21 @@ function updateHUD(){
   const pp=document.getElementById('pzprog');
   if(pp){const d=G.bonusMode?G.puzzlesDone-PUZZLES.length:G.puzzlesDone;const t=G.bonusMode?BONUS.length:PUZZLES.length;pp.textContent=Math.max(0,d)+'/'+t+' seals';}
   ['atk','def','spd','lck'].forEach(k=>{const el=document.getElementById(k+'v');if(el)el.textContent=G[k];});
-  if(G.xp>=G.maxXp){G.xp-=G.maxXp;G.maxXp=~~(G.maxXp*1.5);G.level++;G.atk+=2;G.def+=1;G.maxHp+=5;G.hp=G.maxHp;
-    addStatus('Level Up!');updateHUD();msg(G.charName,'LEVEL UP! I feel so much stronger now! Bring on more challenges!');}
+  let leveled=false;
+  while(G.xp>=G.maxXp){
+    G.xp-=G.maxXp;G.maxXp=Math.round(G.maxXp*1.35);G.level++;
+    G.atk+=2;G.def+=1;G.maxHp+=5;G.hp=G.maxHp;G.maxSta+=1;G.sta=G.maxSta;
+    if(G.level%2===0)G.lck+=1;
+    if(G.level%3===0)G.spd+=1;
+    leveled=true;
+  }
+  if(leveled){
+    addStatus('⬆️ Level '+G.level);
+    const p=w2s(PL.wx,PL.wy);
+    spawnPts(p.x,p.y,'#f0c040',26);spawnPaperBits(p.x,p.y-20,14);
+    spawnFT(p.x,p.y-60,'Level '+G.level+'!');
+    msg(G.charName,'LEVEL UP! I feel stronger, faster, and ready for whatever the forest throws at me!');
+  }
 }
 function updateDots(){
   const dr=document.getElementById('dot-row');dr.innerHTML='';
@@ -3363,7 +3806,7 @@ function castMagic(){
 }
 function inspect(){
   const lines=['Ancient runes shimmer on stones nearby. The pattern flashes briefly.','These tiles form a picture scrambled by time.','I hear twin echoes. Something here exists in pairs.','Petals of different colours bloom briefly each dusk.','The bramble walls form a maze only patience can solve.','A faint hum from that boulder. Something hidden under moss.'];
-  msg(G.charName,lines[~~(Math.random()*lines.length)]);G.xp=Math.min(G.maxXp,G.xp+8);updateHUD();
+  msg(G.charName,lines[~~(Math.random()*lines.length)]);G.xp+=8;updateHUD();
 }
 function showHint(){
   const unsolved=PUZZLES.filter(p=>!G.pzStates[p.id]?.solved);
@@ -3430,6 +3873,33 @@ function nextMsg(){
 
   newBox.addEventListener('click',dismiss,{once:true});
   newBox.addEventListener('touchend',dismiss,{once:true,passive:true});
+}
+function spawnPuff(){
+  const vp=document.getElementById('game-vp');if(!vp)return;
+  const p=w2s(PL.wx,PL.wy);
+  const el=document.createElement('div');el.className='footpuff';
+  el.style.left=(p.x-11)+'px';el.style.top=(p.y-6)+'px';
+  vp.appendChild(el);setTimeout(()=>el.remove(),520);
+}
+function spawnPaperBits(x,y,n=10){
+  const c=document.getElementById('ptcl');if(!c)return;
+  const kinds=['','gold','blue','red'];
+  for(let i=0;i<n;i++){
+    const b=document.createElement('div');b.className='paper-bit '+kinds[~~(Math.random()*kinds.length)];
+    const dx=(-90+Math.random()*180).toFixed(0)+'px';
+    const dy=(-100+Math.random()*80).toFixed(0)+'px';
+    b.style.left=x+'px';b.style.top=y+'px';
+    b.style.setProperty('--dx',dx);b.style.setProperty('--dy',dy);
+    b.style.setProperty('--rot',(Math.random()*540-270)+'deg');
+    b.style.width=(5+Math.random()*7)+'px';b.style.height=(6+Math.random()*9)+'px';
+    c.appendChild(b);setTimeout(()=>b.remove(),1400);
+  }
+}
+function screenShake(sel='#game-vp'){
+  if(SETTINGS.reduceMotion)return;
+  const el=document.querySelector(sel);if(!el)return;
+  el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');
+  setTimeout(()=>el.classList.remove('shake'),360);
 }
 function spawnPts(x,y,col,n=12){
   const c=document.getElementById('ptcl');
@@ -3784,7 +4254,7 @@ function collectOrb(orbId){
   document.getElementById('player-root').className='jump';
   setTimeout(()=>document.getElementById('player-root').className='idle',600);
   addStatus(orb.emoji+' Orb!');
-  G.xp=Math.min(G.maxXp,G.xp+50);G.xpGained+=50;updateHUD();
+  G.xp+=50;G.xpGained+=50;updateHUD();
   msg(G.charName,`The ${orb.name} is mine! I can feel its ancient power humming! Just ${5-Object.keys(ORB_STATE.found).length} more to find!`);
   checkAllOrbs();
 }
@@ -3831,18 +4301,19 @@ function onShopPurchase(){
 // Modified clickChest to require orbs
 function clickChest(){
   if(G.chestOpened){msg(G.charName,'Already grabbed everything! Best haul ever!');return;}
+  const bonus=G.bonusMode;
+  const sealList=bonus?BONUS:PUZZLES;
   const orbCount=Object.keys(ORB_STATE.found).length;
-  if(orbCount<5){
+  if(!bonus&&orbCount<5){
     const rem=5-orbCount;
     msg(G.charName,`The chest has ${rem} empty slot${rem!==1?'s':''}! I need to find all 5 orbs to open it! The hints are out there somewhere...`);
     document.getElementById('player-root').className='hurt';
     setTimeout(()=>document.getElementById('player-root').className='idle',500);
     return;
   }
-  // All orbs found AND all puzzles solved
-  if(!PUZZLES.every(p=>G.pzStates[p.id]?.solved)){
-    const rem=PUZZLES.filter(p=>!G.pzStates[p.id]?.solved).length;
-    msg(G.charName,`${rem} stone seal${rem!==1?'s':''} still need solving! The chest needs both orbs AND seals!`);return;
+  if(!sealList.every(p=>G.pzStates[p.id]?.solved)){
+    const rem=sealList.filter(p=>!G.pzStates[p.id]?.solved).length;
+    msg(G.charName,bonus?`${rem} hidden seal${rem!==1?'s':''} still sleeping! The deep chest is not ready for me yet.`:`${rem} stone seal${rem!==1?'s':''} still need solving! The chest needs both orbs AND seals!`);return;
   }
   G.chestOpened=true;
   document.getElementById('chest-lid').classList.add('open');
@@ -3851,10 +4322,14 @@ function clickChest(){
   spawnFT(pos.x,pos.y-30,'Grand Treasure!');
   [{emoji:'💎',name:'Heart of Forest',count:1},{emoji:'🌿',name:'Healing Herb',count:5},{emoji:'⚡',name:'Magic Crystal',count:3},{emoji:'🏆',name:'Champion Trophy',count:1},{emoji:'🗝️',name:'Ancient Key',count:1}].forEach(r=>addToBag(r));
   G.hp=G.maxHp;G.mp=G.maxMp;G.coins+=200;G.coinsGained+=200;
-  G.xp=Math.min(G.maxXp,G.xp+200);G.xpGained+=200;
-  addStatus('Champion!');updateHUD();
-  msg(G.charName,'THE GRAND FOREST TREASURE! All orbs and seals together unlocked it! HP and MP fully restored! I am literally the best explorer ever!');
-  setTimeout(()=>msg(G.charName,'This jackal is going in the history books! Every corner explored, every secret found!',showVictory),900);
+  G.xp+=200;G.xpGained+=200;
+  addStatus(bonus?'True Forest Master!':'Champion!');updateHUD();
+  msg(G.charName,bonus
+    ?'The hidden compartment! A second Heart of Forest, warm as a coal. The deep forest accepts me as its keeper.'
+    :'THE GRAND FOREST TREASURE! All orbs and seals together unlocked it! HP and MP fully restored! I am literally the best explorer ever!');
+  setTimeout(()=>msg(G.charName,bonus
+    ?'Every secret found. Every seal awake. This is the story the forest will tell forever.'
+    :'This jackal is going in the history books! Every corner explored, every secret found!',bonus?showGrandVictory:showVictory),900);
 }
 
 // ENVIRONMENT & MISC
@@ -3864,8 +4339,27 @@ function initRings(){
     for(let i=0;i<9;i++){const r=document.createElement('div');r.className='ring';c.appendChild(r);}
   });
 }
+let leafInt=null,titleLeafInt=null;
+function initFireflies(){
+  const box=document.getElementById('fireflies');if(!box)return;
+  box.innerHTML='';
+  for(let i=0;i<20;i++){
+    const f=document.createElement('div');f.className='firefly';
+    f.style.left=(4+Math.random()*92)+'%';
+    f.style.top=(20+Math.random()*70)+'%';
+    f.style.setProperty('--fx',(Math.random()*50-25)+'px');
+    f.style.setProperty('--fy',(-20-Math.random()*35)+'px');
+    f.style.setProperty('--fd',(7+Math.random()*9)+'s');
+    f.style.setProperty('--fb',(1.8+Math.random()*3)+'s');
+    f.style.animationDelay=(-Math.random()*8)+'s';
+    f.style.opacity=(.15+Math.random()*.5);
+    box.appendChild(f);
+  }
+}
 function spawnLeaves(){
-  setInterval(()=>{
+  if(leafInt)clearInterval(leafInt);
+  leafInt=setInterval(()=>{
+    if(document.hidden||G.paused)return;
     const l=document.createElement('div');l.className='leaf';
     l.textContent=['🍃','🍂','🌿','🍁'][~~(Math.random()*4)];
     l.style.left=(5+Math.random()*85)+'%';l.style.top='-20px';
@@ -3874,12 +4368,16 @@ function spawnLeaves(){
     document.getElementById('game-vp').appendChild(l);setTimeout(()=>l.remove(),15000);
   },2800);
   const tl=document.getElementById('title-leaves');
-  if(tl)setInterval(()=>{
-    const l=document.createElement('div');
-    l.style.cssText=`position:absolute;font-size:${14+~~(Math.random()*14)}px;left:${Math.random()*100}%;top:-30px;opacity:0;animation:leafFall ${5+Math.random()*8}s ${Math.random()*3}s linear forwards`;
-    l.textContent=['🍃','🍂','🍁','🌿'][~~(Math.random()*4)];
-    tl.appendChild(l);setTimeout(()=>l.remove(),14000);
-  },1200);
+  if(tl){
+    if(titleLeafInt)clearInterval(titleLeafInt);
+    titleLeafInt=setInterval(()=>{
+      if(document.hidden)return;
+      const l=document.createElement('div');
+      l.style.cssText=`position:absolute;font-size:${14+~~(Math.random()*14)}px;left:${Math.random()*100}%;top:-30px;opacity:0;animation:leafFall ${5+Math.random()*8}s ${Math.random()*3}s linear forwards`;
+      l.textContent=['🍃','🍂','🍁','🌿'][~~(Math.random()*4)];
+      tl.appendChild(l);setTimeout(()=>l.remove(),14000);
+    },1200);
+  }
 }
 let timerInt=null;
 function startTimer(){
@@ -3887,7 +4385,7 @@ function startTimer(){
   timerInt=setInterval(()=>{
     G.elapsed++;
     const el=document.getElementById('timer');if(el)el.textContent=fmtT(G.elapsed);
-    if(G.sta<G.maxSta){G.sta=Math.min(G.maxSta,G.sta+.04);updateHUD();}
+    if(G.paused)return;
   },1000);
 }
 function stopTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;}}
@@ -3901,10 +4399,13 @@ function attDiv(st,pen=2){
   a.textContent='Attempts: '+(st.attempts||0)+' | penalty: '+pen+' HP per failure';return a;
 }
 function showAbout(){
-  alert('📓 A Jackal Paper Quest 7.0\n\nFeatures:\n- Custom character name\n- WASD + Arrow Keys movement\n- Shift to run\n- Day/Night cycle with fog\n- Paper Mario style combat\n- Friendly NPC shops (Maple, Thornwick)\n- Chatty NPCs (Pip, Luma)\n- Enemy NPCs that trigger battles\n- Doodle World scribble effect\n- Fog of war exploration\n- 5 main + 3 bonus puzzles\n- 4 save slots\n\nControls:\n- WASD / Arrows: Move\n- Shift: Run\n- Click/Tap: Move to point\n- Joystick: Mobile movement\n- B: Bag, H: Hint, I: Inspect\n- Scroll/Pinch: Zoom\n- Esc: Close panels');
+  alert('📓 A Jackal Paper Quest 7.0\n\nA cut-paper adventure in the Whispering Forest.\n\nWhat is new\n- Hand-cut paper frame, grain, creases and paper-scrap debris\n- Pause notebook with settings (Esc): paper texture, reduce motion, difficulty\n- Sprint with stamina, speed stat, smooth delta-time movement\n- Day counter, clock and fireflies after dusk\n- Tanzled XP levels with buffs, hit numbers and screen shake\n- Story mode never drops below 1 HP; Normal costs coins and sends you to camp\n- Quick herb (R), mute (M), battle number keys (1-4) and Space timing\n\nWorld\n- 5 stone seals, 5 orb trials, 3 bonus chest challenges\n- Maple and Thornwick shops, Pip and Luma chatter\n- Fog of war exploration, doodle scribbles, day/night lighting\n- 4 save slots with autosave every 60 seconds\n\nControls\n- WASD / Arrows: move    Shift: sprint\n- Click/Tap: walk to point    Joystick on mobile\n- E: talk/interact    B: bag    H: hint    I: inspect    R: quick herb\n- Esc: pause or close panels    M: mute\n- 1-4: battle actions    Space / A: timing hit\n- Scroll / pinch: zoom');
 }
 function goTitle(){
   stopTimer();
+  G.paused=false;document.body.classList.remove('paused','night');
+  document.getElementById('pause-screen').classList.remove('show');
+  const pauseBtn=document.getElementById('pause-btn');if(pauseBtn)pauseBtn.classList.remove('paused');
   if(loopId)cancelAnimationFrame(loopId);
   stopAllBgm(400);
   setTimeout(()=>{AUDIO.currentBgm=null;playBgm('title');},500);
@@ -3922,7 +4423,7 @@ setInterval(()=>{
   if(!document.getElementById('game').classList.contains('active'))return;
   const saves=loadSaves();
   if(saves[activeSlot]){
-    saves[activeSlot]={...saves[activeSlot],elapsed:G.elapsed,timeStr:fmtT(G.elapsed),hp:G.hp,coins:G.coins,xp:G.xp,puzzlesDone:G.puzzlesDone,bag:G.bag,pzStates:G.pzStates,bonusMode:G.bonusMode,chestOpened:G.chestOpened,defeatedEnemies:G.defeatedEnemies,camX:CAM.x,camY:CAM.y,revealed:CAM.revealed};
+    saves[activeSlot]={...saves[activeSlot],elapsed:G.elapsed,timeStr:fmtT(G.elapsed),hp:G.hp,coins:G.coins,xp:G.xp,puzzlesDone:G.puzzlesDone,bag:G.bag,pzStates:G.pzStates,bonusMode:G.bonusMode,chestOpened:G.chestOpened,defeatedEnemies:G.defeatedEnemies,orbs:{found:ORB_STATE.found,halves:ORB_STATE.halves},introSeen:G.introSeen,camX:CAM.x,camY:CAM.y,revealed:CAM.revealed,day:G.day||1,dayTime:dayTime};
     writeSaves(saves);
   }
 },60000);
@@ -3937,12 +4438,14 @@ document.getElementById('name-inp').addEventListener('keydown',e=>{
   if(e.key==='Enter')confirmName();
 });
 window.addEventListener('load',()=>{
+  loadSettings();
   // Audio is loaded async, wait a bit then set pending
   setTimeout(()=>{
     AUDIO.pending='title';
     // Will play as soon as user interacts
   },1000);
 });
+loadSettings();
 
 </script>
 </body>
